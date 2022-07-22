@@ -1,6 +1,6 @@
 <template>
     <div :key="task.id" v-for="task in tasks">
-        <Task @delete-task="$emit('delete-task', task.id)" @collapse-details="setActive" :task="task" :isActive="task.id === active" />
+        <Task @delete-task="$emit('delete-task', task.id)" @toggle-reminder="$emit('toggle-reminder', task.id)" @collapse-details="setActive"  :task="task" :isActive="task.id === active" />
     </div>
     <i>**tasks highlighted in green are reminders</i>
 </template>
@@ -21,7 +21,7 @@ export default {
             active : -1
         }
     },
-    emits: ['delete-task'],
+    emits: ['delete-task', 'toggle-reminder'],
     methods: {
         setActive(id) {
             this.active = id

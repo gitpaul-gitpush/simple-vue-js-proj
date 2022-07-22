@@ -1,9 +1,9 @@
 <template>
-    <div :class="[task.reminder ? 'reminder' : '']" @click="collapseDetails(task.id)">
-        <h3>
+    <div :class="[task.reminder ? 'reminder' : '']" @dblclick="$emit('toggle-reminder', task.id)">
+        <h3 @click="$emit('collapse-details', task.id)">
             <i :class="['fas', isActive ? 'fa-angle-up' : 'fa-angle-down']"></i> 
             {{ task.text }}
-            <i @click="onDelete(task.id)" :style="{ color: 'red' }" class="fas fa-times"></i>
+            <i @click="$emit('delete-task', task.id)" :style="{ color: 'red' }" class="fas fa-times"></i>
         </h3>
         <p>{{ task.day }}</p>
     </div>
@@ -18,12 +18,7 @@ export default {
         isActive: Boolean
     },
     methods: {
-        onDelete(id) {
-            this.$emit('delete-task', id)
-        },
-        collapseDetails(id) {
-            this.$emit('collapse-details', id)
-        }
+
     }
 }
 
